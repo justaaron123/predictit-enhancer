@@ -36,5 +36,5 @@ $(document).ready(function(){
     };
 
     $('body').on('mouseenter', '.sharesUp, .sharesDown', showPrices);
-    $('body').on('mouseleave', '.sharesUp, .sharesDown', function(){$('#price_table').remove();});
+    $('body').on('mouseleave', '.sharesUp, .sharesDown, #contractListTable tr', function(){$('#price_table').remove();});
 });
