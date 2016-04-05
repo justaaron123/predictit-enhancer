@@ -1,0 +1,22 @@
+{
+  "name": "PredictIt Enhancer",
+  "version": "1.0",
+  "manifest_version": 2,
+  "permissions": [
+  "https://www.predictit.org/Profile/MyShares",
+  "https://www.predictit.org/Market/*",
+  "storage"
+  ],
+  "icons": {"128": "icon128.png"},
+  "content_scripts": [
+  {
+    "matches": ["https://www.predictit.org/Profile/MyShares"],
+    "js": ["jquery.js","MySharesOrdering.js"],
+    "run_at": "document_end"
+  },
+  {
+    "matches": ["https://www.predictit.org/Market/*"],
+    "js": ["jquery.js","LinkedMarketPriceLists.js"]
+  }
+  ]
+}
