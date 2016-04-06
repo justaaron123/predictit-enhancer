@@ -122,6 +122,8 @@ function makeButtons(market){
 	riskText.style.fontWeight = "bold";
 	
 	topBar[0].parentElement.appendChild(riskText);
+	
+	\\riskText copies the contract name for yes/no markets to the contract header. When collapsed, this text will show
 
 	down = makeDown(topBar[0], market);
 	up = makeUp(topBar[0], market);
@@ -201,7 +203,7 @@ function makeCollapse(topBar, market){
 	collapse.onmouseout = function(){collapse.style.color="";collapse.style.cursor="auto";};
 
 
-//onclick: find rows that are to be collapsed/expanded. Check current mode, switch to other mode.
+//onclick: call collapseThis to change state
 	collapse.addEventListener("click", function(){
 		topBar = market.getElementsByClassName("contract-header")[0]
 		collapseThis(market, collapse, topBar); });
@@ -209,6 +211,8 @@ function makeCollapse(topBar, market){
 	topBar.appendChild(collapse);
 }
 
+
+\\check state of collapse, switch to other view
 
 function collapseThis(market, collapse, topBar){
 		
@@ -293,7 +297,7 @@ function reorder(Markets){
 	
 	console.log(currentView);
 	
-	//collapse those markets that were previously collapsed. Repeat code, clean up eventually.
+	//collapse those markets that were previously collapsed. 
 	for(k=0; k<Markets.length; k++){
 		if(currentView[getName(Markets[k])][1]==true){
 			currentView[getName(Markets[k])][1]=false;
