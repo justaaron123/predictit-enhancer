@@ -114,6 +114,14 @@ function init(){
 
 function makeButtons(market){
 	topBar=market.getElementsByClassName("contract-title");
+	
+	riskLine = market.getElementsByClassName("margin-title");
+	riskText = riskLine[0].firstElementChild.cloneNode(true);
+	riskText.hidden=true;
+	riskText.style.fontSize = "14px";
+	riskText.style.fontWeight = "bold";
+	
+	topBar[0].parentElement.appendChild(riskText);
 
 	down = makeDown(topBar[0], market);
 	up = makeUp(topBar[0], market);
@@ -187,39 +195,57 @@ function makeUp(x, market){
 
 function makeCollapse(topBar, market){
 	var collapse = document.createElement("span");
-	collapse.innerText="\u25B6";
+	collapse.innerText="\u25BC";
+	collapse.className = "collButton";
 	collapse.onmouseenter = function(){collapse.style.color="white";collapse.style.cursor="pointer";};
 	collapse.onmouseout = function(){collapse.style.color="";collapse.style.cursor="auto";};
 
 
-
 //onclick: find rows that are to be collapsed/expanded. Check current mode, switch to other mode.
 	collapse.addEventListener("click", function(){
+		topBar = market.getElementsByClassName("contract-header")[0]
+		collapseThis(market, collapse, topBar); });
+	
+	topBar.appendChild(collapse);
+}
+
+
+function collapseThis(market, collapse, topBar){
+		
 		title=getName(market);
 		body = market.getElementsByTagName("tbody");
 		rows = body[0].getElementsByTagName("tr");
 		
 		if(currentView[title][1]==false){
-			for(i=0; i<rows.length-1; i++){
+			for(i=0; i<rows.length; i++){
 				rows[i].hidden = true;
 			}
-			collapse.innerText="\u25BC";
+			 for(i=1; i<topBar.getElementsByTagName("th").length; i++){
+			 	topBar.getElementsByTagName("th")[i].hidden=true;
+			}
+			
+			topBar.lastElementChild.hidden=false;
+						
+			collapse.innerText="\u25B6";
 			currentView[title][1] = true;
 			save();
 		}	
 		
 		else{
-			for(i=0; i<rows.length-1; i++){
+			for(i=0; i<rows.length; i++){
 				rows[i].hidden = false;
 			}
-			collapse.innerText="\u25B6";
+			for(i=1; i<topBar.getElementsByTagName("th").length; i++){
+				topBar.getElementsByTagName("th")[i].hidden=false;					
+			}
+			
+			topBar.lastElementChild.hidden=true;
+						
+			collapse.innerText="\u25BC";
 			currentView[title][1] = false;
 			save();
 		}
 		
-		});
-	
-	topBar.appendChild(collapse);
 }
 
 
@@ -270,14 +296,10 @@ function reorder(Markets){
 	//collapse those markets that were previously collapsed. Repeat code, clean up eventually.
 	for(k=0; k<Markets.length; k++){
 		if(currentView[getName(Markets[k])][1]==true){
-			body = Markets[k].getElementsByTagName("tbody");
-			rows = body[0].getElementsByTagName("tr");
-			for(i=0; i<rows.length-1; i++){
-				rows[i].hidden = true;
-			}
-			x=Markets[k].getElementsByClassName("margin-title")[0];
-			x.firstElementChild.nextElementSibling.nextElementSibling.innerText="Expand"
-		
+			currentView[getName(Markets[k])][1]=false;
+			collapse = Markets[k].getElementsByClassName("collButton")[0];
+			topBar = Markets[k].getElementsByClassName("contract-header")[0];
+			collapseThis(Markets[k], collapse, topBar);
 		}
 	}
 
