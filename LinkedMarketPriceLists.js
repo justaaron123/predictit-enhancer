@@ -1,9 +1,6 @@
 $(document).ready(function(){
 
-    var showPrices = function(e) { 
-
-
-        var $cPrice = $(this);
+    var showPrices = function(e, $cPrice) { 
 
         var pos = $cPrice.offset();
 
@@ -16,6 +13,8 @@ $(document).ready(function(){
             : contractUrl;
 
         $.get(contractUrl + "#openoffers #openoffers1", function(data) {
+
+            if (!$cPrice.hasClass('showPrice')) return;
 
             $('#price_table').remove();
 
@@ -35,6 +34,21 @@ $(document).ready(function(){
         });
     };
 
-    $('body').on('mouseenter', '.sharesUp, .sharesDown', showPrices);
-    $('body').on('mouseleave', '.sharesUp, .sharesDown, #contractListTable tr', function(){$('#price_table').remove();});
+    $('body').on('mouseenter', '.sharesUp, .sharesDown', function(e) {
+
+        $cPrice = $(this);
+
+        $cPrice.addClass('showPrice');
+
+         var timeoutId = setTimeout(function() {
+            if ($cPrice.hasClass('showPrice')) {
+                showPrices(e, $cPrice);
+            }
+        }, 300);
+    });
+
+    $('body').on('mouseleave', '.sharesUp, .sharesDown, #contractListTable tr', function(){
+        $(this).removeClass('showPrice');
+        $('#price_table').remove();
+    });
 });
