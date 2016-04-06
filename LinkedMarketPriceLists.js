@@ -1,41 +1,40 @@
-init();
+$(document).ready(function(){
 
-function init(){
-  document.getElementsByClassName("outcome-title")[0].children[0].children[0].id = "first_market";
-  for (i = 0; i < $('.sharesMarket').length; i++) { 
-    var thingy2 = document.getElementsByClassName("outcome-title")[i].children[0].children[0];
-    thingy2.onmouseover = function(){showPrices(this)};
-    thingy2.onmouseout = function(){$('#price_tables').remove()};
-  }
-}
+    var showPrices = function(e) { 
 
-function showPrices(element) { 
-  var newDiv = document.createElement("div");
-  newDiv.setAttribute("id","price_tables");
-  document.body.appendChild(newDiv);
-  newDiv.style.position = "absolute";
-  var eTop = $('#first_market').offset().top - 220;
-  var eLeft = $('#first_market').offset().left + 230;
-  newDiv.style.left = eLeft+"px";
-  newDiv.style.top = eTop+"px";
-  newDiv.style.backgroundColor = 'white';
-  
-  that = element.parentNode.parentNode;
-  var URL = that.children[0]+"#openoffers #openoffers1";
 
-  $('#price_tables').load(URL);
-  newDiv.style.border = '1px solid #dddddd';
-}
+        var $cPrice = $(this);
 
-canary = document.createElement("span");
-canary.setAttribute("id","canary");
-document.getElementsByClassName("outcome-title")[0].children[0].children[0].id = "first_market";
-document.getElementById("first_market").appendChild(canary);
-var checkId = setInterval(check, 100);
+        var pos = $cPrice.offset();
 
-function check(){
-  if(!$("#canary").length){
-    clearInterval(checkId); 
-    init(); 
-  }
-}
+        var $parentRow = $cPrice.parents('tr');
+
+        var contractUrl = $parentRow.find('.outcome-title a').attr('href');
+
+        contractUrl = (contractUrl.indexOf("http") == -1) 
+            ?  document.location.protocol + '//' + document.location.host + contractUrl
+            : contractUrl;
+
+        $.get(contractUrl + "#openoffers #openoffers1", function(data) {
+
+            $('#price_table').remove();
+
+            var priceClass = $cPrice.hasClass('sharesUp') ? '.panel-success' : '.panel-danger';
+
+            var pricesHtml = $(data).find('#openoffers1 ' + priceClass).parent().html();
+
+            var priceTable = $('<div id="price_table"></div>');
+
+            priceTable.show()
+            .append(pricesHtml)
+            .css('position', 'absolute')
+            .css('top', pos.top - 50 + 'px')
+            .css('left', pos.left + 'px')
+            .appendTo('body');
+
+        });
+    };
+
+    $('body').on('mouseenter', '.sharesUp, .sharesDown', showPrices);
+    $('body').on('mouseleave', '.sharesUp, .sharesDown, #contractListTable tr', function(){$('#price_table').remove();});
+});
