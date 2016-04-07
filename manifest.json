@@ -1,6 +1,6 @@
 {
 	"name": "PredictIt Enhancer",
-	"version": "1.2",
+	"version": "1.3",
 	"manifest_version": 2,
 	"permissions": [
 	"https://www.predictit.org/Profile/MyShares",
@@ -16,7 +16,7 @@
 	},
 	{
 		"matches": ["https://www.predictit.org/Market/*"],
-		"js": ["jquery.js","bootstrap.min.js","LinkedMarketPriceLists.js","MySharesHoverView.js"]
+		"js": ["jquery.js","bootstrap.min.js","LinkedMarketPriceLists.js","MySharesHoverView.js","TopDownMenu2.js"]
 	}
 	]
 }
