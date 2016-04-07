@@ -10,6 +10,7 @@ function init3(){
 	newDiv.style.left = "200px";
 	newDiv.style.top = "50px";
 	newDiv.style.overflow = "scroll";
+	newDiv.style.height = '75%';
 	newDiv.style.zIndex = "100000";
 	newDiv.style.backgroundColor = 'white';
 	$('#myshares').hide();
