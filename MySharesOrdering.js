@@ -80,7 +80,7 @@ function init(){
 		//Set a view position for new markets that were not included at last load, 
 		//automatically sent to bottom of viewpage
 		
-	
+
 		makeButtons(Markets[i]);
 			
 	}
@@ -108,11 +108,10 @@ function init(){
 
 
 
-
-
 //Adds up and down buttons, Collapse/expand button for linked markets
 
 function makeButtons(market){
+
 	topBar=market.getElementsByClassName("contract-title");
 	
 	riskLine = market.getElementsByClassName("margin-title");
@@ -122,8 +121,8 @@ function makeButtons(market){
 	riskText.style.fontWeight = "bold";
 	
 	topBar[0].parentElement.appendChild(riskText);
-	
-	\\riskText copies the contract name for yes/no markets to the contract header. When collapsed, this text will show
+
+	//riskText copies the contract name for yes/no markets to the contract header. When collapsed, this text will show
 
 	down = makeDown(topBar[0], market);
 	up = makeUp(topBar[0], market);
@@ -212,7 +211,7 @@ function makeCollapse(topBar, market){
 }
 
 
-\\check state of collapse, switch to other view
+//check state of collapse, switch to other view
 
 function collapseThis(market, collapse, topBar){
 		
