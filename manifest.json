@@ -16,7 +16,11 @@
 	},
 	{
 		"matches": ["https://www.predictit.org/Market/*"],
-		"js": ["jquery.js","bootstrap.min.js","LinkedMarketPriceLists.js","MySharesHoverView.js","TopDownMenu2.js"]
+		"js": ["jquery.js","bootstrap.min.js","LinkedMarketPriceLists.js","MySharesHoverView.js","MySharesOrdering.js","TopDownMenu2.js"]
+	},
+	{
+		"matches": ["https://www.predictit.org/Contract/*"],
+		"js": ["jquery.js","bootstrap.min.js","LinkedMarketPriceLists.js","MySharesHoverView.js","MySharesOrdering.js","TopDownMenu2.js"]
 	}
 	]
 }

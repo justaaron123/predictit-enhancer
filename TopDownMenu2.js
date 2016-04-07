@@ -8,9 +8,11 @@ function init3(){
 // NOTE Lots of the stuff below will go in a .css file
 	newDiv.style.position = "fixed";
 	newDiv.style.left = "200px";
-	newDiv.style.top = "50px";
+	newDiv.style.top = "40px";
 	newDiv.style.overflow = "scroll";
-	newDiv.style.height = '75%';
+	newDiv.style.height = '85%';
+	newDiv.style.border = "2px solid #333333";
+	newDiv.style.borderRadius = "6px";
 	newDiv.style.zIndex = "100000";
 	newDiv.style.backgroundColor = 'white';
 	$('#myshares').hide();
@@ -41,10 +43,10 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
 	window.scrollTo(0, 0);
 });
 
-function TradeRefresh() {
-	LoadShares();
-	updateFundsMainNav(false);
-};
+// function TradeRefresh() {
+// 	LoadShares();
+// 	updateFundsMainNav(false);
+// };
 
 function LoadShares() {
 	window.scrollTo(0, 0);
@@ -57,8 +59,11 @@ function LoadShares() {
 			$('#myshares').html(result);
 		}
     });
+    init();
 };
 
 function toggleMyShares(){ 
-  $('#myshares').toggle();
+	LoadShares();
+	$('#myshares > p').remove();
+	$('#myshares').toggle();
 }
