@@ -13,7 +13,7 @@ function init3(){
 	newDiv.style.height = '85%';
 	newDiv.style.border = "2px solid #333333";
 	newDiv.style.borderRadius = "6px";
-	newDiv.style.zIndex = "100000";
+	newDiv.style.zIndex = "1010";
 	newDiv.style.backgroundColor = 'white';
 	$('#myshares').hide();
 
