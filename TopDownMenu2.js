@@ -40,7 +40,7 @@ jQuery(document).ready(LoadShares);
 
 $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
 	window.location.hash = e.target.hash;
-	window.scrollTo(0, 0);
+//	window.scrollTo(0, 0);
 });
 
 // function TradeRefresh() {
@@ -49,7 +49,7 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
 // };
 
 function LoadShares() {
-	window.scrollTo(0, 0);
+//	window.scrollTo(0, 0);
 	$.ajax({
 		type: 'GET',
     	url: '/Profile/GetSharesAjax',
