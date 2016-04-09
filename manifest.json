@@ -7,6 +7,7 @@
 	"https://www.predictit.org/Market/*",
 	"storage"
 	],
+    "web_accessible_resources": ["TopDownMenu2.js", "MySharesOrdering.js", "https://www.predictit.org/Content/css/myShares.css"],
 	"icons": {"128": "icon128.png"},
 	"content_scripts": [
 	{
@@ -16,11 +17,11 @@
 	},
 	{
 		"matches": ["https://www.predictit.org/Market/*"],
-		"js": ["jquery.js","bootstrap.min.js","LinkedMarketPriceLists.js","MySharesHoverView.js","MySharesOrdering.js","TopDownMenu2.js"]
+		"js": ["jquery.js","bootstrap.min.js","global.js","LinkedMarketPriceLists.js","MySharesHoverView.js","loadTopDown.js"]
 	},
 	{
 		"matches": ["https://www.predictit.org/Contract/*"],
-		"js": ["jquery.js","bootstrap.min.js","LinkedMarketPriceLists.js","MySharesHoverView.js","MySharesOrdering.js","TopDownMenu2.js"]
+		"js": ["jquery.js","bootstrap.min.js","global.js","LinkedMarketPriceLists.js","MySharesHoverView.js","loadTopDown.js"]
 	}
 	]
 }
