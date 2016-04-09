@@ -19,7 +19,7 @@ $(document).ready(function(){
             .css('left', pos.left - 250 + 'px')
             .css('z-index', '100001')
             .appendTo('body');
-            var timeoutId = setTimeout(function() {
+            setTimeout(function() {
                 if ($cPrice.hasClass('showPrice')) {
                     showPrices(e, $cPrice);
                 }
