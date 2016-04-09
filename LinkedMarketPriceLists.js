@@ -19,18 +19,23 @@ $(document).ready(function(){
             .css('left', pos.left - 250 + 'px')
             .css('z-index', '100001')
             .appendTo('body');
+            var timeoutId = setTimeout(function() {
+                if ($cPrice.hasClass('showPrice')) {
+                    showPrices(e, $cPrice);
+                }
+            }, 3000);
         });
     };
-    $('body').on('mouseenter', '.sharesUp, .sharesDown', function(e) {
+    $('body').on('mouseenter', 'a.sharesUp, a.sharesDown', function(e) {
         $cPrice = $(this);
         $cPrice.addClass('showPrice');
          var timeoutId = setTimeout(function() {
             if ($cPrice.hasClass('showPrice')) {
                 showPrices(e, $cPrice);
             }
-        }, 300);
+        }, 200);
     });
-    $('body').on('mouseleave', '.sharesUp, .sharesDown, #contractListTable tr', function(){
+    $('body').on('mouseleave', 'a.sharesUp, a.sharesDown, #contractListTable tr', function(){
         $(this).removeClass('showPrice');
         $('#price_table').remove();
     });
