@@ -4,7 +4,7 @@ $(document).ready(function(){
     $('body').on('click', 'a.refresh', function() {
         setTimeout(function() {
             appendCheckbox();
-        }, 1000);
+        }, 1200);
     });
 
     $('body').on('click', '#refreshPrices', refreshPrices);
@@ -26,12 +26,14 @@ $(document).ready(function(){
             return; 
         }
 
+        $('span.sharesUp, span.sharesDown').trigger('mouseleave');
+
         autoRefresh = true;
 
         $('a.refresh').trigger('click');
 
         setTimeout(function() {
-            refreshPrices()();
+            refreshPrices();
         }, 6500);
 
     }
