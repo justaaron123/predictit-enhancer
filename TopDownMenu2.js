@@ -59,7 +59,7 @@ function LoadShares() {
 			$('#myshares').html(result);
 		}
     });
-    init();
+	window.postMessage("Please run init.", "*")
 };
 
 function toggleMyShares(){ 

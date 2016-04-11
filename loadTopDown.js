@@ -1,6 +1,5 @@
 $(document).ready(function(){
 
-    addScript('MySharesOrdering.js');
     addScript('TopDownMenu2.js');
     addScript('DistinguishPriceModals.js');
 
