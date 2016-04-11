@@ -1,5 +1,6 @@
 $(document).ready(function(){
     var autoRefresh = false;
+    var arInterval = 20000;
 
     $('body').on('click', '#refreshPrices', refreshPrices);
 
@@ -9,16 +10,21 @@ $(document).ready(function(){
         }, 1450);
     });
 
+    $('body').on('focusout', '#arInterval', function() {
+        arInterval = ($.isNumeric($(this).val()) ? $(this).val() : 20) * 1000;
+    });
+
     function appendCheckbox() {
-        if ($('#refreshPrices').length > 0) {
-            $('#refreshPrices').remove();
+        if ($('#contractsRefresh').length > 0) {
+            $('#contractsRefresh').remove();
         }
 
-        $('<span> \
+        $('<span id="contractsRefresh"> \
             <input id="refreshPrices" type="checkbox" \
             name="autorefresh" value="1" style="margin: 0 3px;" \
             ' + ((autoRefresh) ? 'checked="checked"' : '') + '> \
             <label style="margin: 0px;" for="refreshPrices">Auto Refresh</label> \
+            <input id="arInterval" style="text-align: right;" type="text" size="2" name="seconds" value="'+ (arInterval / 1000) +'" />s \
             </span>').appendTo('th.contract-title');
 
     }
@@ -95,7 +101,7 @@ $(document).ready(function(){
                 refreshPrices();
             }
 
-        }, 6500);
+        }, arInterval);
 
     }
 
