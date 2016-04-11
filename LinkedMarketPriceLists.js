@@ -7,31 +7,46 @@ $(document).ready(function(){
             ? document.location.protocol + '//' + document.location.host + contractUrl
             : contractUrl;
         $.get(contractUrl + "#openoffers #openoffers1", function(data) {
-            $('#price_table').remove();
-            if (!$cPrice.hasClass('showPrice')) return;
+            if (!$cPrice.hasClass('showPrice'))  {
+                $('#price_table').remove();
+                return;
+            }
             var priceClass = $cPrice.hasClass('sharesUp') ? '.panel-success' : '.panel-danger';
             var pricesHtml = $(data).find('#openoffers1 ' + priceClass).parent().html();
-            var priceTable = $('<div id="price_table"></div>');
+            var priceTable = $('#price_table').length ? $('#price_table') : $('<div id="price_table"></div>');
             priceTable.show()
-            .append(pricesHtml)
+            .html(pricesHtml)
             .css('position', 'absolute')
             .css('top', pos.top - 150 + 'px')
             .css('left', pos.left - 250 + 'px')
             .css('z-index', '100001')
             .appendTo('body');
+            setTimeout(function() {
+                if ($cPrice.hasClass('showPrice')) {
+                    showPrices(e, $cPrice);
+                }
+            }, 3000);
         });
     };
-    $('body').on('mouseenter', '.sharesUp, .sharesDown', function(e) {
+    $('body').on('mouseenter', 'span.sharesUp, span.sharesDown', activatePriceTable);
+    $('body').on('mouseleave', 'span.sharesUp, span.sharesDown', deactivatePriceTable);
+    $('body').on('click', 'span.sharesUp, span.sharesDown', deactivatePriceTable);
+
+    function activatePriceTable(e) {
         $cPrice = $(this);
+
         $cPrice.addClass('showPrice');
          var timeoutId = setTimeout(function() {
             if ($cPrice.hasClass('showPrice')) {
                 showPrices(e, $cPrice);
             }
-        }, 300);
-    });
-    $('body').on('mouseleave', '.sharesUp, .sharesDown, #contractListTable tr', function(){
+        }, 200);
+    }
+
+    function deactivatePriceTable(e) {
         $(this).removeClass('showPrice');
         $('#price_table').remove();
+    }
+    $('body').on('mouseleave', 'span.sharesUp, span.sharesDown', function(){
     });
 });

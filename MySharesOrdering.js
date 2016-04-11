@@ -7,17 +7,16 @@ chrome.storage.sync.get('currentView', function(x){currentView=x.currentView;
 		currentView={};
 	}
 	init();
-	});
+});
 
 var scriptToInject = function(){
-	OldLoadShares = LoadShares;
-	
-	LoadShares = function(){
-		OldLoadShares();
-		
-		window.postMessage("Please run init.", "*")
+	if (typeof(LoadShares) == "function"){ 
+		OldLoadShares = LoadShares;
+		LoadShares = function(){
+			OldLoadShares();
+			window.postMessage("Please run init.", "*")
+		}
 	}
-	
 }
 injectScript(scriptToInject);
 
@@ -88,6 +87,7 @@ function init(){
 	save();
 	reorder(Markets);
 	
+	$('#myshares > p').remove();
 	
 	// canary = document.createElement("span");
 	// 		canary.id = "canary";

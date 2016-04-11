@@ -1,12 +1,13 @@
 {
 	"name": "PredictIt Enhancer",
-	"version": "1.2",
+	"version": "1.3.1",
 	"manifest_version": 2,
 	"permissions": [
 	"https://www.predictit.org/Profile/MyShares",
 	"https://www.predictit.org/Market/*",
 	"storage"
 	],
+    "web_accessible_resources": ["TopDownMenu2.js", "MySharesOrdering.js", "ContractsRefreshPrices.js", "https://www.predictit.org/Content/css/myShares.css","DistinguishPriceModals.js"],
 	"icons": {"128": "icon128.png"},
 	"content_scripts": [
 	{
@@ -16,7 +17,11 @@
 	},
 	{
 		"matches": ["https://www.predictit.org/Market/*"],
-		"js": ["jquery.js","bootstrap.min.js","LinkedMarketPriceLists.js","MySharesHoverView.js"]
+		"js": ["jquery.js","bootstrap.min.js","global.js","LinkedMarketPriceLists.js","MySharesHoverView.js","loadTopDown.js","loadAutoRefresh.js"]
+	},
+	{
+		"matches": ["https://www.predictit.org/Contract/*"],
+		"js": ["jquery.js","bootstrap.min.js","global.js","LinkedMarketPriceLists.js","MySharesHoverView.js","loadTopDown.js"]
 	}
 	]
 }
