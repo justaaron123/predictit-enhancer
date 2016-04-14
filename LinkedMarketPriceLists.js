@@ -33,9 +33,13 @@ $(document).ready(function(){
     $('body').on('click', 'span.sharesUp, span.sharesDown', deactivatePriceTable);
 
     function activatePriceTable(e) {
-        $cPrice = $(this);
+        $('span.sharesUp, span.sharesDown').removeClass('showPrice');
 
+		window.postMessage('pauseRefresh', "*")
+
+        $cPrice = $(this);
         $cPrice.addClass('showPrice');
+
          var timeoutId = setTimeout(function() {
             if ($cPrice.hasClass('showPrice')) {
                 showPrices(e, $cPrice);
@@ -44,8 +48,16 @@ $(document).ready(function(){
     }
 
     function deactivatePriceTable(e) {
-        $(this).removeClass('showPrice');
+        $cPrice = $(this);
+        $cPrice.removeClass('showPrice');
+
         $('#price_table').remove();
+
+         var timeoutId = setTimeout(function() {
+            if (!$cPrice.hasClass('showPrice')) {
+		        window.postMessage('unpauseRefresh', "*")
+            }
+        }, 200);
     }
     $('body').on('mouseleave', 'span.sharesUp, span.sharesDown', function(){
     });

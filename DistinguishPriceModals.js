@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-    $('#contractList div.modal').on('shown.bs.modal', function() {
+    $('body').on('shown.bs.modal', '#contractList div.modal', function() {
 
         var $modal = $(this);
 
