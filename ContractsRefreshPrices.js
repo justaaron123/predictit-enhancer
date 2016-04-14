@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    var autoRefresh = false;
+    var autoRefresh = true;
     var arInterval = 20000;
 
     $('body').on('click', '#refreshPrices', refreshPrices);
